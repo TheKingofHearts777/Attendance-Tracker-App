@@ -31,4 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/application.properties
+\attendance-app\src\api\src\main\resources\application.properties
