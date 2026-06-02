@@ -1,93 +1,98 @@
-# Classroom Attendance Tracker App
+# ScrumOfTheEarth
+## Attendance App
+* Gavin Papenthien
+* Sam Miller
+* John Trachte
+* Dylan Brodie
+
+## API
+Backend RESTful API \
+Built with Java 21 and Spring Boot 3.2.2 \
+Build Tool - Apache Maven
+
+Authoritative system for all business logic & resource CRUD. \
+Fully implemented stateless JWT authentication & User role-based authorization.
+
+**Dependancies:**
+* Apache Maven 3.9.6 https://maven.apache.org/download.cgi
+* All other dependancies listed in `pom.xml` will be automatically installed by Maven.
+* Java 21
+
+**Build Instructions:**
+* Open IntelliJ IDE
+* Select `file --> open`
+* Navigate to API source download
+* Select `pom.xml`
+* Choose "Open as project"
+* Run `ApiApplication` file
+
+**Test Reproduction:**
+* Open in IntelliJ IDE with the same method as Build Instructions.
+* Navigate to `src/test/java/attendanceapp.api` in the Project Explorer
+* Right click the `attendanceapp.api` package
+* Hover "More Run/Debug" on the dropdown
+* Select "Run 'tests in "attendanceapp.api'" with Coverage"
+* If prompted in bottom right corner of IDE, accept "Enable Lombok Generation"
+* When tests are complete running, a report should appear on the right side of the IDE.
+* If prompted with popup, select "Replace Active Suites"
+
+**Warning:** If tests are ran at 11:50pm or later, they will crash. The tests are reliant on automatically generated data using SQL queries that add ten minutes to the current local time and does not wrap into the next day, causing failure.
+
+## Database
+
+**Dependancies:**
+* pgAdmin4 install
+* Latest PostgreSQL version
+* libnfc-bin
+* libnfc-examples
+* Ubuntu device
 
 
+**Build Instructions:**
+* Open pgAdmin4
+* Connect to server or create one
+* Write queries to create needed tables for database
+* Write `SELECT` queries to check if columns created successfully
+* Add things to table using the `INSERT INTO` command
 
-## Getting started
+## Scanner
+**Ubuntu Setup**
+* Run scanner/install.sh as root
+* Create relevant roomData.txt in /usr directory
+* Run script `main` in `src/scanner/scanner/src/main/dist`
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+**Dependancies:**
+* Python
+* PySerial
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+**Build Instructions:**
+* Open Pycharm IDE
+* Select `file --> open`
+* Navigate to Scanner source download
+* Open in Pycharm
+* Connect CP2102 USB to UART (NFC reader module)
+* Connect microcontroller
+* Run `main.py`
 
-## Add your files
+**Test Reproduction**
+* Open in Pycharm IDE with the same method as Build Instructions
+* Open system terminal in Pycharm
+* Run command `pytest --cov=src --cov-report term-missing`
+**Notes:** 
+Tests on the functionality of the microcontroller will require a pass with a jumper between pin 14 and 3v3 and a pass with no jumper. 
+Tests on the functionality of the API will require that a student with an ID corresponding to the NFC card is enrolled within the system in a class occuring during time of test.
+Tests on the functionality of the NFC scanner module will require a pass with a short card ID, a pass with a long card ID, and a pass with the NFC scanner module unplugged.
+Function `run()` in `start_manager.py` lacks test functions; `run()` consists of an infinite loop, and is impossible to test by code.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+## Frontend 
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/dbrodie678/classroom-attendance-tracker-app.git
-git branch -M main
-git push -uf origin main
-```
+**Dependancies:**
+* Node js
+* React
+* IDE capable of runnin java script
 
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/dbrodie678/classroom-attendance-tracker-app/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+**Build Instructions:**
+* (recommended) Install newest VS Code
+* Install newest nodejs LTS version for your operating system
+* open ternminal in VS Code and run this line: npm install npm-scripts
+* then run this line: npm install universal-cookie
