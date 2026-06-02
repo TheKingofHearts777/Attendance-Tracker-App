@@ -1,5 +1,4 @@
-# ScrumOfTheEarth
-## Attendance App
+# Attendance Tracker App
 * Gavin Papenthien
 * Sam Miller
 * John Trachte
